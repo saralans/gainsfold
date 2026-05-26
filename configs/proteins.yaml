@@ -1,0 +1,192 @@
+proteins:
+  titin:
+    uniprot_id: "Q8WZ42"
+    name: "Titin"
+    gene: "TTN"
+    total_residues: 34350
+    pdb_ids: []
+    alphafold_db: true
+    domains:
+      - name: "Z_disk_Ig"
+        start: 1
+        end: 800
+        type: "Ig"
+        function: "Z-disk anchoring"
+        folding_rate: 0.85
+      - name: "N2B_unique"
+        start: 2100
+        end: 2174
+        type: "unstructured"
+        function: "Elastic spring element"
+        folding_rate: 0.40
+      - name: "PEVK"
+        start: 2174
+        end: 3300
+        type: "unstructured"
+        function: "Extensible region, entropy spring"
+        folding_rate: 0.35
+      - name: "A_band_FnIII"
+        start: 3300
+        end: 5000
+        type: "FnIII"
+        function: "Thick filament binding"
+        folding_rate: 0.78
+      - name: "M_line_kinase"
+        start: 34200
+        end: 34350
+        type: "kinase"
+        function: "Mechanosensing kinase domain"
+        folding_rate: 0.72
+
+  myosin_heavy_chain:
+    uniprot_id: "Q9UKX2"
+    name: "Myosin-2 heavy chain"
+    gene: "MYH2"
+    total_residues: 1935
+    pdb_ids: ["2MYS", "5TBY"]
+    alphafold_db: true
+    domains:
+      - name: "motor_domain"
+        start: 1
+        end: 780
+        type: "motor"
+        function: "ATPase, actin binding"
+        folding_rate: 0.80
+      - name: "lever_arm"
+        start: 780
+        end: 850
+        type: "helix"
+        function: "Force amplification"
+        folding_rate: 0.90
+      - name: "rod_domain"
+        start: 850
+        end: 1935
+        type: "coiled_coil"
+        function: "Thick filament assembly"
+        folding_rate: 0.75
+
+  actin:
+    uniprot_id: "P60709"
+    name: "Beta-actin"
+    gene: "ACTB"
+    total_residues: 375
+    pdb_ids: ["1ATN", "6DJN"]
+    alphafold_db: true
+    domains:
+      - name: "actin_monomer"
+        start: 1
+        end: 375
+        type: "globular"
+        function: "Thin filament polymerization unit"
+        folding_rate: 0.88
+
+  troponin_i:
+    uniprot_id: "P48788"
+    name: "Troponin I, fast skeletal"
+    gene: "TNNI2"
+    total_residues: 182
+    pdb_ids: ["4Y99"]
+    alphafold_db: true
+    domains:
+      - name: "inhibitory_region"
+        start: 96
+        end: 116
+        type: "helix"
+        function: "Inhibits actomyosin ATPase"
+        folding_rate: 0.70
+
+  troponin_c:
+    uniprot_id: "P02585"
+    name: "Troponin C, fast skeletal"
+    gene: "TNNC2"
+    total_residues: 162
+    pdb_ids: ["1J1E"]
+    alphafold_db: true
+    domains:
+      - name: "n_lobe"
+        start: 1
+        end: 90
+        type: "EF_hand"
+        function: "Ca2+ sensor, regulatory"
+        folding_rate: 0.82
+      - name: "c_lobe"
+        start: 91
+        end: 162
+        type: "EF_hand"
+        function: "Structural Ca2+ binding"
+        folding_rate: 0.85
+
+# Dissociation constants (Kd) for key interactions — from literature
+# Units: nM unless noted
+binding_affinities:
+  actin_myosin_rigor:
+    partners: ["actin", "myosin_heavy_chain"]
+    kd_nM: 10.0
+    condition: "rigor (no ATP)"
+    source: "Geeves & Holmes 2005"
+  actin_myosin_weak:
+    partners: ["actin", "myosin_heavy_chain"]
+    kd_nM: 5000.0
+    condition: "weakly-bound (ATP present)"
+    source: "Geeves & Holmes 2005"
+  troponin_i_troponin_c:
+    partners: ["troponin_i", "troponin_c"]
+    kd_nM: 2.0
+    condition: "Ca2+ saturated"
+    source: "Li et al. 2004"
+  titin_myosin_rod:
+    partners: ["titin", "myosin_heavy_chain"]
+    kd_nM: 100.0
+    condition: "A-band"
+    source: "Labeit & Kolmerer 1995"
+
+# Sarcomere assembly order (step index = priority)
+assembly_order:
+  - step: 1
+    name: "Z_disk_nucleation"
+    proteins: ["titin", "actin"]
+    domains: ["Z_disk_Ig", "actin_monomer"]
+    description: "Titin Z-disk anchors; actin nucleates at Z-disk"
+  - step: 2
+    name: "thin_filament_elongation"
+    proteins: ["actin", "troponin_i", "troponin_c"]
+    domains: ["actin_monomer", "inhibitory_region", "n_lobe"]
+    description: "Actin polymerizes; troponin complex decorates thin filament"
+  - step: 3
+    name: "thick_filament_integration"
+    proteins: ["myosin_heavy_chain"]
+    domains: ["motor_domain", "rod_domain"]
+    description: "Myosin rods self-assemble into thick filament backbone"
+  - step: 4
+    name: "titin_scaffold_attachment"
+    proteins: ["titin", "myosin_heavy_chain"]
+    domains: ["A_band_FnIII", "M_line_kinase", "rod_domain"]
+    description: "Titin A-band spans thick filament; M-line kinase anchors"
+
+# Therapy parameter space for optimization
+therapy_space:
+  leucine_dose_g:
+    min: 0.0
+    max: 10.0
+    unit: "grams"
+    effect: "mTOR activation → ribosomal synthesis rate multiplier"
+    multiplier_formula: "1.0 + 0.15 * min(dose, 5.0)"
+  rest_hours:
+    min: 24.0
+    max: 96.0
+    unit: "hours"
+    effect: "Recovery window before next training stimulus"
+    optimal_range: [36, 72]
+  sleep_quality:
+    min: 0.0
+    max: 1.0
+    unit: "normalized score"
+    effect: "Growth hormone secretion proxy → folding rate modifier"
+    multiplier_formula: "0.7 + 0.6 * sleep_quality"
+  body_temperature_c:
+    min: 36.0
+    max: 38.5
+    unit: "Celsius"
+    effect: "Protein folding kinetics (Arrhenius-like)"
+    reference_temp: 37.0
+    activation_energy_kJ: 50.0

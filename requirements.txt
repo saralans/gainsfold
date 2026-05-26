@@ -1,0 +1,17 @@
+biopython>=1.83
+networkx>=3.3
+scikit-optimize>=0.9.0
+py3Dmol>=2.1.0
+plotly>=5.22.0
+requests>=2.32.0
+pyyaml>=6.0.1
+pytest>=8.2.0
+jupyter>=1.0.0
+notebook>=7.2.0
+ipywidgets>=8.1.0
+numpy>=1.26.0
+pandas>=2.2.0
+matplotlib>=3.9.0
+
+# GPU-only: uncomment when running on a machine with >=48GB VRAM
+# boltz>=1.0.0
