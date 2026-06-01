@@ -159,7 +159,7 @@ assembly_order:
     description: "Myosin rods self-assemble into thick filament backbone"
   - step: 4
     name: "titin_scaffold_attachment"
-    proteins: ["titin", "myosin_heavy_chain"]
+    proteins: ["titin", "titin", "myosin_heavy_chain"]
     domains: ["A_band_FnIII", "M_line_kinase", "rod_domain"]
     description: "Titin A-band spans thick filament; M-line kinase anchors"
 
