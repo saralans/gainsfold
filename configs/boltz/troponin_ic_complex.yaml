@@ -1,0 +1,41 @@
+# Boltz-2 structure prediction config — Troponin I / Troponin C regulatory complex
+# TnI UniProt: P48788 | TNNI2 | 182 residues (fast skeletal)
+# TnC UniProt: P02585 | TNNC2 | 162 residues (fast skeletal)
+# Predicted as a two-chain complex (A = TnI, B = TnC)
+# Published Kd = 2 nM (Ca2+-saturated); tight complex well-suited for co-prediction
+#
+# CPU run:   boltz predict configs/boltz/troponin_ic_complex.yaml --out_dir outputs/boltz --device cpu
+# GPU run:   boltz predict configs/boltz/troponin_ic_complex.yaml --out_dir outputs/boltz --device cuda
+
+domain: troponin_ic_complex
+proteins:
+  - name: troponin_i
+    uniprot_id: P48788
+    residue_range: [1, 182]
+    chain_id: A
+  - name: troponin_c
+    uniprot_id: P02585
+    residue_range: [1, 162]
+    chain_id: B
+
+# Per-chain pLDDT is extracted separately for the inhibitory_region (TnI)
+# and n_lobe / c_lobe (TnC) domains after prediction.
+domain_map:
+  troponin_i__inhibitory_region:
+    chain: A
+    residue_range: [96, 116]
+  troponin_c__n_lobe:
+    chain: B
+    residue_range: [1, 90]
+  troponin_c__c_lobe:
+    chain: B
+    residue_range: [91, 162]
+
+boltz_options:
+  recycling_steps: 3
+  sampling_steps: 200
+  diffusion_samples: 1
+  output_format: mmcif
+  use_msa_server: false
+
+sequence: null

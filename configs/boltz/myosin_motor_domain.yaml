@@ -1,0 +1,24 @@
+# Boltz-2 structure prediction config — myosin-2 heavy chain motor domain
+# UniProt: Q9UKX2 | MYH2 | residues 1–780 (ATPase / actin-binding head)
+# High-confidence fold; PDB references 2MYS, 5TBY
+#
+# CPU run:   boltz predict configs/boltz/myosin_motor_domain.yaml --out_dir outputs/boltz --device cpu
+# GPU run:   boltz predict configs/boltz/myosin_motor_domain.yaml --out_dir outputs/boltz --device cuda
+
+domain: motor_domain
+protein: myosin_heavy_chain
+uniprot_id: Q9UKX2
+residue_range: [1, 780]
+chain_id: A
+
+boltz_options:
+  recycling_steps: 3
+  sampling_steps: 200
+  diffusion_samples: 1
+  output_format: mmcif
+  use_msa_server: false
+
+# Sequence: fetch residues 1–780 of Q9UKX2 from UniProt before GPU run.
+# BoltzRunner handles this automatically via Bio.ExPASy.
+# Sequence omitted here due to length (780 aa); see BoltzRunner._fetch_sequence().
+sequence: null

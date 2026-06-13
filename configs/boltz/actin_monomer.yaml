@@ -1,0 +1,30 @@
+# Boltz-2 structure prediction config — actin monomer
+# UniProt: P60709 | Beta-actin | 375 residues (full monomer)
+# Thin filament polymerization unit; well-characterized globular fold
+#
+# CPU run:   boltz predict configs/boltz/actin_monomer.yaml --out_dir outputs/boltz --device cpu
+# GPU run:   boltz predict configs/boltz/actin_monomer.yaml --out_dir outputs/boltz --device cuda
+# Cloud run: see docs/gpu_upgrade_path.md for Modal / RunPod setup
+
+domain: actin_monomer
+protein: actin
+uniprot_id: P60709
+residue_range: [1, 375]
+chain_id: A
+
+boltz_options:
+  recycling_steps: 3
+  sampling_steps: 200
+  diffusion_samples: 1
+  output_format: mmcif
+  use_msa_server: false   # set true for higher accuracy on GPU
+
+# Sequence source: UniProt P60709 canonical isoform
+# BoltzRunner fetches this automatically; included here for reference
+sequence: >-
+  MDDDIAALVVDNGSGMCKAGFAGDDAPRAVFPSIVGRPRHQGVMVGMGQKDSYVGDEAQSKRGI
+  LTLKYPIEHGIVTNWDDMEKIWHHTFYNELRVAPEEHPVLLTEAPLNPKANREKMTQIMFETFNT
+  PAMYVAIQAVLSLYASGRTTGIVMDSGDGVTHTVPIYEGYALPHAILRLDLAGRDLTDYLMKILT
+  ERGYSFTTTAEREIVRDIKEKLCYVALDFEQEMATAASSSSLEKSYELPDGQVITIGNERFRCPEA
+  LFQPSFLGMESCGIHETTFNSIMKCDVDIRKDLYANTVLSGGTTMYPGIADRMQKEITALAPSTM
+  KIKIIAPPERKYSVWIGGSILASLSTFQQMWISKQEYDESGPSIVHRKCF

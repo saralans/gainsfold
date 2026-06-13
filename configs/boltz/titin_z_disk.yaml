@@ -1,0 +1,25 @@
+# Boltz-2 structure prediction config — titin Z-disk immunoglobulin domain
+# UniProt: Q8WZ42 | TTN | residues 1–800 (Z1-Z2 Ig tandem)
+# First structured region of titin; anchors the sarcomere Z-disk
+# NOTE: Full titin (34350 aa) far exceeds Boltz-2 capacity.
+#       This config targets the Z-disk Ig domain only.
+#
+# CPU run:   boltz predict configs/boltz/titin_z_disk.yaml --out_dir outputs/boltz --device cpu
+# GPU run:   boltz predict configs/boltz/titin_z_disk.yaml --out_dir outputs/boltz --device cuda
+
+domain: Z_disk_Ig
+protein: titin
+uniprot_id: Q8WZ42
+residue_range: [1, 800]
+chain_id: A
+
+boltz_options:
+  recycling_steps: 3
+  sampling_steps: 200
+  diffusion_samples: 1
+  output_format: mmcif
+  use_msa_server: false
+
+# Titin is far too large for whole-chain prediction.
+# BoltzRunner slices residues 1–800 of Q8WZ42 via Bio.ExPASy before GPU run.
+sequence: null
