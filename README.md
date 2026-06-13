@@ -1,3 +1,12 @@
+yaml---
+title: GainsFold
+emoji: 🤗
+colorFrom: purple
+colorTo: brown
+sdk: gradio
+pinned: false
+---
+
 # Sarcomere Repair Optimizer
 
 Computational pipeline for modeling sarcomere reconstruction after resistance-training-induced microtears. Models the ordered folding and assembly of giant muscle proteins — **titin, myosin, actin, and troponin** — and estimates how therapeutic interventions (leucine supplementation, sleep quality, temperature) reduce recovery time and DOMS duration.
