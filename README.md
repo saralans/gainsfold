@@ -1,8 +1,31 @@
+---
+title: GainsFold
+emoji: 🤗
+colorFrom: purple
+colorTo: gray
+sdk: gradio
+pinned: false
+---
+
 # Sarcomere Repair Optimizer
 
 Computational pipeline for modeling sarcomere reconstruction after resistance-training-induced microtears. Models the ordered folding and assembly of giant muscle proteins — **titin, myosin, actin, and troponin** — and estimates how therapeutic interventions (leucine supplementation, sleep quality, temperature) reduce recovery time and DOMS duration.
 
 Built with the [Boltz](https://github.com/jwohlwend/boltz) architecture (MIT, 2024) as the structural prediction backbone, with a CPU-runnable repair pathway model and therapy optimizer on top.
+
+---
+
+## Live demo
+
+**[huggingface.co/spaces/saralagold/gainsfold](https://huggingface.co/spaces/saralagold/gainsfold)**
+
+An interactive Gradio app deployed on Hugging Face Spaces (free CPU tier, auto-deployed from this repo via GitHub Actions). No setup required — adjust the therapy sliders and run the simulation in the browser.
+
+- **Repair Simulator** — set leucine dose, sleep quality, and body temperature; outputs total repair time, per-step breakdown, domain stability chart, and bottleneck risk table comparing baseline vs optimised protocol
+- **Leucine Sensitivity** — sweeps 0–10g leucine to show where mTOR activation saturates and returns diminish
+- **About** — formulas, protein table, and literature references
+
+Boltz-2 pLDDT scores run from the pre-computed cache on CPU. Real structure predictions require a GPU Space (≥48 GB VRAM).
 
 ---
 
