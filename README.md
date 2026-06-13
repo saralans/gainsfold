@@ -2,7 +2,7 @@
 title: GainsFold
 emoji: 🤗
 colorFrom: purple
-colorTo: brown
+colorTo: gray
 sdk: gradio
 pinned: false
 ---
