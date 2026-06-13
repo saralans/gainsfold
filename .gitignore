@@ -7,4 +7,4 @@ data/processed/
 *.pdb
 *.pdbqt
 *.pt
-*.ckpt
+*.ckptb
