@@ -1,0 +1,24 @@
+# Boltz-2 structure prediction config — myosin-2 heavy chain rod + lever arm
+# UniProt: Q9UKX2 | MYH2 | lever arm residues 780–850, rod residues 850–1935
+# Predicted as a single chain; coiled-coil rod typically yields moderate pLDDT
+#
+# CPU run:   boltz predict configs/boltz/myosin_rod_domain.yaml --out_dir outputs/boltz --device cpu
+# GPU run:   boltz predict configs/boltz/myosin_rod_domain.yaml --out_dir outputs/boltz --device cuda
+
+domain: rod_domain
+protein: myosin_heavy_chain
+uniprot_id: Q9UKX2
+residue_range: [780, 1935]
+chain_id: A
+
+boltz_options:
+  recycling_steps: 3
+  sampling_steps: 200
+  diffusion_samples: 1
+  output_format: mmcif
+  use_msa_server: false
+
+# Lever arm (780-850) is a single α-helix — high pLDDT expected.
+# Rod (850-1935) is coiled-coil — moderate pLDDT; repetitive sequence can
+# reduce MSA depth, so use_msa_server: true is recommended for GPU runs.
+sequence: null

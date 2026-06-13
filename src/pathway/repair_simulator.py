@@ -96,6 +96,7 @@ def _step_duration(mean_stability: float, rate_modifier: float) -> float:
 def simulate_repair(
     therapy_params: dict[str, float] | None = None,
     config_path: Path = _CONFIG_PATH,
+    use_boltz: bool = False,
 ) -> RepairReport:
     """Run the sarcomere repair simulation.
 
@@ -104,6 +105,11 @@ def simulate_repair(
     therapy_params:
         Optional dict with keys matching therapy_space in proteins.yaml.
         Defaults to baseline (no intervention).
+    use_boltz:
+        When True, replace hand-tuned folding rates with Boltz-2 pLDDT scores
+        before running the simulation.  Uses the mock cache by default (no GPU
+        required); set BoltzRunner(use_mock=False) on a GPU node for real
+        predictions.  See src/prediction/boltz_runner.py.
     config_path:
         Path to proteins.yaml.
 
@@ -116,6 +122,14 @@ def simulate_repair(
 
     therapy_params = therapy_params or {}
     G = build_assembly_graph(config)
+
+    if use_boltz:
+        from src.prediction.boltz_runner import BoltzRunner
+        from src.prediction.confidence_mapper import update_graph_from_predictions
+        runner = BoltzRunner(use_mock=True)
+        predictions = runner.predict_all(config)
+        G = update_graph_from_predictions(G, predictions)
+
     rate_modifier = _therapy_rate_modifier(therapy_params, config)
 
     step_map = assembly_step_nodes(G)

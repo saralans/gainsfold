@@ -1,0 +1,91 @@
+{
+  "version": "boltz-2-mock-v1",
+  "generated": "2026-06-13",
+  "note": "Mock pLDDT scores derived from AlphaFold2 confidence estimates for these domains. Replace by running BoltzRunner with use_mock=False on a GPU node.",
+  "domains": {
+    "titin__Z_disk_Ig": {
+      "plddt_mean": 87.3,
+      "residue_count": 800,
+      "is_mock": true,
+      "source_config": "configs/boltz/titin_z_disk.yaml",
+      "note": "Ig-fold; well-packed beta-sandwich, high confidence expected"
+    },
+    "titin__N2B_unique": {
+      "plddt_mean": 38.5,
+      "residue_count": 75,
+      "is_mock": true,
+      "source_config": null,
+      "note": "Intrinsically disordered elastic element; very low pLDDT is correct"
+    },
+    "titin__PEVK": {
+      "plddt_mean": 31.2,
+      "residue_count": 1127,
+      "is_mock": true,
+      "source_config": null,
+      "note": "Proline-glutamate-valine-lysine repeat; IDP region, low pLDDT expected"
+    },
+    "titin__A_band_FnIII": {
+      "plddt_mean": 79.4,
+      "residue_count": 1700,
+      "is_mock": true,
+      "source_config": null,
+      "note": "Fibronectin type-III repeat; beta-sandwich fold, moderate-high confidence"
+    },
+    "titin__M_line_kinase": {
+      "plddt_mean": 74.1,
+      "residue_count": 151,
+      "is_mock": true,
+      "source_config": null,
+      "note": "Serine/threonine kinase domain; bilobal fold, confident in core"
+    },
+    "myosin_heavy_chain__motor_domain": {
+      "plddt_mean": 83.6,
+      "residue_count": 780,
+      "is_mock": true,
+      "source_config": "configs/boltz/myosin_motor_domain.yaml",
+      "note": "Well-characterised motor head; extensive structural data (PDB: 2MYS)"
+    },
+    "myosin_heavy_chain__lever_arm": {
+      "plddt_mean": 91.8,
+      "residue_count": 71,
+      "is_mock": true,
+      "source_config": "configs/boltz/myosin_rod_domain.yaml",
+      "note": "Single alpha-helix; near-perfect confidence for short helical segments"
+    },
+    "myosin_heavy_chain__rod_domain": {
+      "plddt_mean": 77.2,
+      "residue_count": 1086,
+      "is_mock": true,
+      "source_config": "configs/boltz/myosin_rod_domain.yaml",
+      "note": "Coiled-coil; repetitive sequence reduces per-residue confidence slightly"
+    },
+    "actin__actin_monomer": {
+      "plddt_mean": 91.2,
+      "residue_count": 375,
+      "is_mock": true,
+      "source_config": "configs/boltz/actin_monomer.yaml",
+      "note": "Highly conserved globular fold; top-tier confidence (PDB: 1ATN)"
+    },
+    "troponin_i__inhibitory_region": {
+      "plddt_mean": 72.5,
+      "residue_count": 21,
+      "is_mock": true,
+      "source_config": "configs/boltz/troponin_ic_complex.yaml",
+      "note": "Short inhibitory helix; confidence improves significantly in complex with TnC"
+    },
+    "troponin_c__n_lobe": {
+      "plddt_mean": 84.9,
+      "residue_count": 90,
+      "is_mock": true,
+      "source_config": "configs/boltz/troponin_ic_complex.yaml",
+      "note": "EF-hand Ca2+ sensor; well-defined helix-loop-helix motif"
+    },
+    "troponin_c__c_lobe": {
+      "plddt_mean": 87.1,
+      "residue_count": 72,
+      "is_mock": true,
+      "source_config": "configs/boltz/troponin_ic_complex.yaml",
+      "note": "Structural EF-hand; constitutively Ca2+-bound, higher confidence than n_lobe"
+    }
+  }
+}
