@@ -1,4 +1,4 @@
-yaml---
+---
 title: GainsFold
 emoji: 🤗
 colorFrom: purple
